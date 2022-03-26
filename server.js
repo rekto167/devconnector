@@ -8,6 +8,10 @@ connectDB();
 app.get('/', (req, res) => {
     res.send('API running');
 })
+
+// Initial Middleware
+app.use(express.json({extend: true}));
+
 // Define routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
