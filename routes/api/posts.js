@@ -36,4 +36,17 @@ router.post('/', [auth,[
     }
 })
 
+// @router  POST api/posts
+// @desc    Get all profile
+// @access  Private
+router.get('/', auth, async(req, res) => {
+    try {
+        const posts = await Post.find();
+        res.json(posts);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+})
+
 module.exports = router;
