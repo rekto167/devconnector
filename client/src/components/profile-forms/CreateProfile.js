@@ -1,4 +1,8 @@
 import React, {Fragment, useState} from 'react'
+import {Link, useNavigate} from 'react-router-dom'
+import {createProfile} from '../../actions/profile'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faFacebook, faYoutube, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
@@ -17,7 +21,7 @@ const initialState = {
     instagram: ''
 }
 
-const CreateProfile = () => {
+const CreateProfile = ({createProfile, history}) => {
 
     const [formData, setFormData] = useState(initialState)
     const [displaySocialInputs, toggledSocialInput] = useState(false)
@@ -39,6 +43,13 @@ const CreateProfile = () => {
 
     const onChange = e => setFormData({...formData, [e.target.name] : e.target.value})
 
+    const navigate = useNavigate()
+
+    const onSubmit = e => {
+        e.preventDefault()
+        createProfile(formData, navigate)
+    }
+
     return (
         <div className="container">
             <h1 className="large text-primary">
@@ -49,7 +60,7 @@ const CreateProfile = () => {
             profile stand out
         </p>
         <small>* = required field</small>
-        <form className="form">
+        <form className="form" onSubmit={e => onSubmit(e)} >
             <div className="form-group">
             <select name="status" value={status} onChange={e => onChange(e)} >
                 <option value="0">* Select Professional Status</option>
@@ -150,4 +161,8 @@ const CreateProfile = () => {
     )
 }
 
-export default CreateProfile
+CreateProfile.propTypes = {
+    createProfile: PropTypes.func.isRequired
+}
+
+export default connect(null, {createProfile})(CreateProfile)
