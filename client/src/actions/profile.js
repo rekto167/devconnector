@@ -33,11 +33,12 @@ export const createProfile = (formData, navigate, edit = false ) => async dispat
             payload: res.data
         })
 
-        dispatch(setAlert(edit ? 'Profile updated' : 'Profile created'))
+        dispatch(setAlert(edit ? 'Profile updated' : 'Profile created', 'success'))
 
         if(!edit){
             navigate('/dashboard')
         }
+        navigate('/dashboard')
     } catch (err) {
 
         const errors = err.response.data.errors
