@@ -14,6 +14,7 @@ const Dashboard = ({getCurrentProfile, deleteAccount, auth: {user}, profile:{pro
   useEffect(() => {
     getCurrentProfile()
   }, [getCurrentProfile]);
+
   return (
     <div className="container">
       {loading && profile === null ? (
