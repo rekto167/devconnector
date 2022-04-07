@@ -61,7 +61,7 @@ const EditProfile = ({profile: {profile, loading}, getCurrentProfile, createProf
             youtube: loading || !profile.social ? '' : profile.social.youtube,
             instagram: loading || !profile.social ? '' : profile.social.instagram,
         });
-    }, [loading]);
+    }, [loading, getCurrentProfile]);
 
     const onSubmit = e => {
         e.preventDefault()
