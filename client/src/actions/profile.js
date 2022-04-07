@@ -177,17 +177,13 @@ export const addEducation = (formData, navigate) => async dispatch => {
 export const deleteExperience = (id) => async (dispatch) => {
     try {
         const res = await axios.delete(`/api/profile/experience/${id}`);
-        dispatch({
-            type: GET_PROFILE,
-            payload:res.data
-        })
 
         dispatch({
             type: UPDATE_PROFILE,
             payload: res.data
         })
 
-        dispatch(setAlert('Experience Removed', 'danger'));
+        dispatch(setAlert('Experience Removed', 'success'));
     } catch (err) {
         dispatch({
             type: PROFILE_ERROR,
@@ -201,14 +197,10 @@ export const deleteEducation = id => async dispatch => {
     try {
         const res = await axios.delete(`/api/profile/education/${id}`);
         dispatch({
-            type: GET_PROFILE,
-            payload:res.data
-        })
-        dispatch({
             type:UPDATE_PROFILE,
             payload: res.data
         })
-        dispatch(setAlert('Education Removed', 'danger'));
+        dispatch(setAlert('Education Removed', 'success'));
         getCurrentProfile();
     } catch (err) {
         dispatch({
@@ -222,7 +214,7 @@ export const deleteEducation = id => async dispatch => {
 export const deleteAccount = () => async dispatch => {
     if(window.confirm('Are you sure you want to delete this account?')){
         try {
-            const res =  await axios.delete('/api/profile');
+            await axios.delete('/api/profile');
             dispatch({type:CLEAR_PROFILE});
             dispatch({type:ACCOUNT_DELETED});
 
