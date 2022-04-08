@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,7 @@ const ProfileTop = ({
     company,
     location,
     website,
-    social: { twitter, facebook, linkedin, youtube, instagram },
+    social,
   },
 }) => {
   return (
@@ -35,30 +35,55 @@ const ProfileTop = ({
             <FontAwesomeIcon icon={faGlobe} />
           </a>
         )}
-        {twitter && (
-          <a href={twitter} target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faTwitter} />
-          </a>
-        )}
-        {facebook && (
-          <a href={facebook} target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faFacebook} />
-          </a>
-        )}
-        {linkedin && (
-          <a href={linkedin} target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faLinkedin} />
-          </a>
-        )}
-        {youtube && (
-          <a href={youtube} target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faYoutube} />
-          </a>
-        )}
-        {instagram && (
-          <a href={instagram} target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faInstagram} />
-          </a>
+
+        {social !== undefined && (
+          <Fragment>
+            {social.twitter && (
+              <a
+                href={social.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faTwitter} />
+              </a>
+            )}
+            {social.facebook && (
+              <a
+                href={social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faFacebook} />
+              </a>
+            )}
+            {social.linkedin && (
+              <a
+                href={social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faLinkedin} />
+              </a>
+            )}
+            {social.youtube && (
+              <a
+                href={social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faYoutube} />
+              </a>
+            )}
+            {social.instagram && (
+              <a
+                href={social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faInstagram} />
+              </a>
+            )}
+          </Fragment>
         )}
       </div>
     </div>
