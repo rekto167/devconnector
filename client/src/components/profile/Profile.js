@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { getProfileByUserId } from "../../actions/profile";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
+import ProfileTop from "./ProfileTop";
+import ProfileAbout from "./ProfileAbout";
 
 const Profile = ({
   getProfileByUserId,
@@ -48,6 +50,8 @@ const Profile = ({
                 Edit Profile
               </Link>
             )}
+          <ProfileTop profile={profile} />
+          <ProfileAbout profile={profile} />
         </Fragment>
       )}
     </section>
