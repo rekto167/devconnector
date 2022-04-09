@@ -8,29 +8,13 @@ import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
+import ProfileGithub from "./ProfileGithub";
 
 const Profile = ({ getProfileByUserId, auth, profile: { profile } }) => {
   const { id } = useParams();
   useEffect(() => {
     getProfileByUserId(id);
   }, [getProfileByUserId]);
-
-  const not = (
-    <Link to="/profiles" className="btn btn-light">
-      Back
-    </Link>
-  );
-
-  const yes = (
-    <Fragment>
-      <Link to="/profiles" className="btn btn-light">
-        Back
-      </Link>
-      <Link to="/profiles" className="btn btn-dark">
-        Edit Profile
-      </Link>
-    </Fragment>
-  );
 
   return (
     <section className="container">
@@ -74,6 +58,11 @@ const Profile = ({ getProfileByUserId, auth, profile: { profile } }) => {
               <h4>No education credential</h4>
             )}
           </div>
+          {profile.githubusername ? (
+            <ProfileGithub username={profile.githubusername} />
+          ) : (
+            ""
+          )}
         </Fragment>
       )}
     </section>
