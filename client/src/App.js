@@ -13,6 +13,7 @@ import AddExperience from "./components/profile-forms/AddExperience";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import Posts from "./components/posts/Posts";
+import Post from "./components/post/Post";
 
 import PrivateRoute from "./routing/PrivateRoute";
 
@@ -65,6 +66,10 @@ const App = () => {
               element={<PrivateRoute component={AddExperience} />}
             />
             <Route path="/posts" element={<PrivateRoute component={Posts} />} />
+            <Route
+              path="/posts/:id"
+              element={<PrivateRoute component={Post} />}
+            />
           </Routes>
         </Fragment>
       </Router>

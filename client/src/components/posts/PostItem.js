@@ -17,10 +17,11 @@ const PostItem = ({
   deletePost,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
+  showActions,
 }) => (
   <div className="post bg-white p-1 my-1">
     <div>
-      <Link to="/profile">
+      <Link to={`/profile/${user}`}>
         <img className="round-img" src={avatar} alt="" />
         <h4>{name}</h4>
       </Link>
@@ -30,36 +31,44 @@ const PostItem = ({
       <p className="post-date">
         Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
       </p>
-      <button
-        onClick={() => addLike(_id)}
-        type="button"
-        className="btn btn-light"
-      >
-        <FontAwesomeIcon icon={faThumbsUp} />
-        {likes.length === 0 ? "" : <span>{likes.length}</span>}
-      </button>
-      <button
-        onClick={() => removeLike(_id)}
-        type="button"
-        className="btn btn-light"
-      >
-        <FontAwesomeIcon icon={faThumbsDown} />
-      </button>
-      <Link to="/post" className="btn btn-primary">
-        Discussion <span className="comment-count">{comments.length}</span>
-      </Link>
-      {user === auth.user._id && (
-        <button
-          onClick={() => deletePost(_id)}
-          type="button"
-          className="btn btn-danger"
-        >
-          <FontAwesomeIcon icon={faTimes} />
-        </button>
+      {showActions && (
+        <Fragment>
+          <button
+            onClick={() => addLike(_id)}
+            type="button"
+            className="btn btn-light"
+          >
+            <FontAwesomeIcon icon={faThumbsUp} />
+            {likes.length === 0 ? "" : <span>{likes.length}</span>}
+          </button>
+          <button
+            onClick={() => removeLike(_id)}
+            type="button"
+            className="btn btn-light"
+          >
+            <FontAwesomeIcon icon={faThumbsDown} />
+          </button>
+          <Link to={`/posts/${_id}`} className="btn btn-primary">
+            Discussion <span className="comment-count">{comments.length}</span>
+          </Link>
+          {user === auth.user._id && (
+            <button
+              onClick={() => deletePost(_id)}
+              type="button"
+              className="btn btn-danger"
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+          )}
+        </Fragment>
       )}
     </div>
   </div>
 );
+
+PostItem.defaultProps = {
+  showActions: true,
+};
 
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
@@ -67,6 +76,7 @@ PostItem.propTypes = {
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
   deletePost: PropTypes.func.isRequired,
+  showActions: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
