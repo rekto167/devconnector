@@ -9,11 +9,12 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
-import { addLike, removeLike } from "../../actions/post";
+import { addLike, removeLike, deletePost } from "../../actions/post";
 
 const PostItem = ({
   addLike,
   removeLike,
+  deletePost,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
 }) => (
@@ -48,7 +49,11 @@ const PostItem = ({
         Discussion <span className="comment-count">{comments.length}</span>
       </Link>
       {user === auth.user._id && (
-        <button type="button" className="btn btn-danger">
+        <button
+          onClick={() => deletePost(_id)}
+          type="button"
+          className="btn btn-danger"
+        >
           <FontAwesomeIcon icon={faTimes} />
         </button>
       )}
@@ -61,10 +66,13 @@ PostItem.propTypes = {
   auth: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addLike, removeLike })(PostItem);
+export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
+  PostItem
+);
