@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Moment from "react-moment";
 import Spinner from "../layout/Spinner";
 import PostItem from "./PostItem";
+import PostForm from "./PostForm";
 import { getPosts, addLike, removeLike } from "../../actions/post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -30,7 +31,7 @@ const Posts = ({
       <p className="lead">
         <FontAwesomeIcon icon={faUser} /> Welcome to the community
       </p>
-      {/* <PostForm /> */}
+      <PostForm />
       <div className="posts">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
